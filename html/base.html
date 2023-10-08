@@ -3,9 +3,10 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - Glassmorphism Creative Cloud App Redesign</title>
+  <title>Golang simple website</title>
  
 <link rel="stylesheet" href="/styles/style.css">
+<link rel = "icon" href = "/assets/Go-Logo_Aqua.svg"  type = "image/x-icon">
 
 </head>
 <body>
@@ -37,10 +38,11 @@
   </div>
  </div>
  <div class="wrapper">
+ 
 
-  {{template "left_side"}}
+  {{template "left_side" .}}
   
-  {{template "main_content" }}
+  {{template "main_content" .}}
   
   
  </div>

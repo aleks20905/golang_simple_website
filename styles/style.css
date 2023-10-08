@@ -45,7 +45,7 @@ html {
 
 body {
   font-family: var(--body-font);
-  background-image: url(dark-wwds.jpg);
+  background-image: url(/assets/dark-wwds.jpg);
   background-size: cover;
   background-position: center;
   display: flex;
