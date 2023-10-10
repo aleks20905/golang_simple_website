@@ -8,21 +8,37 @@ import (
 )
 
 type Device_asset struct {
-	Name string
-	Idk  int
-	Work bool
+	Name    string
+	Idk     int
+	Working bool
+	Model   string
+	//CereatedTime time
+	//LatestStatus time
+	//LatestRepair time
 }
 
+/*
+	type ListOfRepairs struct{
+		Problem string
+		Fix string
+		Description string
+		StartedRepair time
+		EndedRepair time
+
+}
+*/
 func main() {
 	fmt.Println("Go app...")
 
 	// handler function #1 - returns the index.html template, with film data
 	h1 := func(w http.ResponseWriter, r *http.Request) {
 		tmpl := template.Must(template.ParseFiles("html/base.html", "html/main_content.html", "html/left_side.html"))
+		id := r.URL.Query().Get("id")
+		fmt.Println("id =>", id)
 		deviceassets := map[string][]Device_asset{
 			"deviceassets": {
-				{Name: "idasdasdk", Idk: 10, Work: true},
-				{Name: "asd", Idk: 15, Work: true},
+				{Name: "Кутер", Idk: 10, Working: true, Model: "mazda"},
+				{Name: "Голяма бъркалка", Idk: 15, Working: true},
 			},
 		}
 
