@@ -1,5 +1,6 @@
 {{define "main_content"}}
 <div class="main-container">
+    <!--  
     <div class="main-header">
      <a class="menu-link-main" href="#">All Apps</a>
      <div class="header-menu">
@@ -7,9 +8,49 @@
       <a class="main-header-link" href="#">Mobile</a>
       <a class="main-header-link" href="#">Web</a>
  
-     </div>
-    </div>
+      </div>
+    </div>  
+    -->
     
+    <div class="content-wrapper">
+        <div class="content-wrapper-header">
+         <div class="content-wrapper-context">
+          <h3 class="img-content">
+           
+            {{with(index .DeviceAssets 0) }} {{.Name   }} {{end}}
+            
+          </h3>
+          <button class="content-button">Start free trial</button>
+         
+         </div>
+        </div>
+
+        <div class="content-section">
+            <table>
+            {{range .Smt}}
+
+                <tr>
+                    <td>Problems</td>
+                    <td> {{.Problems}}</td>
+                </tr>
+                <tr>
+                    <td>Fix</td>
+                    <td> {{.Fix}}</td>
+
+                </tr>
+                <tr>
+                    <td>Idk</td> 
+                    <td> {{.Idk}}</td>
+
+                </tr>
+                
+                
+            
+            {{end}}
+            </table>
+        </div>
+
+    </div>
     
      
     <!--

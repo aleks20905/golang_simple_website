@@ -18,6 +18,15 @@ type Device_asset struct {
 	//LatestStatus time.Time
 	//LatestRepair time.Time
 }
+type Someting struct {
+	Problems string
+	Fix      string
+	Idk      string
+}
+type PageData struct {
+	DeviceAssets []Device_asset
+	Smt          []Someting
+}
 
 /*
 	type ListOfRepairs struct{
@@ -39,14 +48,21 @@ func main() {
 		fmt.Println("id =>", id)
 
 		// TO DO retrive form DB and sent the right data from 'id'
-		deviceassets := map[string][]Device_asset{
-			"deviceassets": {
-				{Name: "Кутер", Idk: time.Now(), Working: true, Model: "mazda"},
-				{Name: "Голяма бъркалка", Idk: time.Now(), Working: true},
-			},
+		deviceAssets := []Device_asset{
+			{Name: "Кутер", Idk: time.Now(), Working: true, Model: "mazda"},
+			{Name: "Голяма бъркалка", Idk: time.Now(), Working: true},
 		}
 
-		tmpl.ExecuteTemplate(w, "base", deviceassets)
+		somethings := []Someting{
+			{Problems: "Кутер", Fix: "true", Idk: "asd"},
+		}
+
+		data := PageData{
+			DeviceAssets: deviceAssets,
+			Smt:          somethings,
+		}
+
+		tmpl.ExecuteTemplate(w, "base", data)
 	}
 
 	// define handlers
