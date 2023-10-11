@@ -48,8 +48,7 @@ func main() {
 		// TO DO retrive form DB and sent the right data from 'id'
 		deviceAssets := []Device_asset{
 			{Name: "Example Device", Idk: time.Now(), Working: true, Model: "ABC123", CreatedTime: time.Now(), LatestRepair: time.Now(), ScheduledRepair: time.Now(),
-				RepairList: ListOfRepairs{
-					Problem: "Broken Screen", Fix: "Replace Screen", Description: "The device's screen is cracked.", StartedRepair: time.Now(), EndedRepair: time.Now()},
+				RepairList: ListOfRepairs{Problem: "Broken Screen", Fix: "Replace Screen", Description: "The device's screen is cracked.", StartedRepair: time.Now(), EndedRepair: time.Now()},
 			},
 			{Name: "Голяма бъркалка", Idk: time.Now(), Working: true},
 		}
