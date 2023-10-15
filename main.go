@@ -9,16 +9,22 @@ import (
 )
 
 type Device_asset struct {
-	Name            string
-	Idk             time.Time
-	Working         bool
-	Model           string
-	RepairList      ListOfRepairs
-	CreatedTime     time.Time
-	LatestRepair    time.Time
-	ScheduledRepair time.Time
-}
+	Name        string
+	Model       string
+	Description string
+	Working     bool
 
+	RepairList      ListOfRepairs
+	LatestRepair    time.Time
+	ScheduledRepair scheduledRepair
+
+	CreatedTime time.Time
+	LastUpdated time.Time
+}
+type scheduledRepair struct {
+	DateOfRepair     time.Time
+	AddedDescription string
+}
 type ListOfRepairs struct {
 	Problem       string
 	Fix           string
@@ -56,10 +62,11 @@ func main() {
 
 		// TO DO retrive form DB and sent the right data from 'id'
 		deviceAssets := []Device_asset{
-			{Name: "Example Device", Idk: time.Now(), Working: true, Model: "ABC123", CreatedTime: time.Now(), LatestRepair: time.Now(), ScheduledRepair: time.Now(),
-				RepairList: ListOfRepairs{Problem: "Broken Screen", Fix: "Replace Screen", Description: "The device's screen is cracked.", StartedRepair: time.Now(), EndedRepair: time.Now()},
+			{Name: "Example Device", LastUpdated: time.Now(), Working: true, Model: "ABC123", CreatedTime: time.Now(), LatestRepair: time.Now(),
+				RepairList:      ListOfRepairs{Problem: "Broken Screen", Fix: "Replace Screen", Description: "The device's screen is cracked.", StartedRepair: time.Now(), EndedRepair: time.Now()},
+				ScheduledRepair: scheduledRepair{DateOfRepair: time.Now(), AddedDescription: "idk someting cool"},
 			},
-			{Name: "Голяма бъркалка", Idk: time.Now(), Working: true},
+			{Name: "Голяма бъркалка", LastUpdated: time.Now(), Working: true},
 		}
 
 		somethings := []Someting{
