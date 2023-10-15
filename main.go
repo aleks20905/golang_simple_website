@@ -32,8 +32,19 @@ type Someting struct {
 	Idk      string
 }
 type PageData struct {
-	DeviceAssets []Device_asset
-	Smt          []Someting
+	DeviceAssetsNames []Device_asset
+	DeviceAssets      []Device_asset
+	Smt               []Someting
+}
+
+func getDeviceByName(devices []Device_asset, name string) Device_asset {
+	for _, device := range devices {
+		if device.Name == name {
+			return device
+		}
+	}
+	// Return an empty Device_asset if no match is found
+	return Device_asset{}
 }
 
 func main() {
@@ -42,8 +53,6 @@ func main() {
 	// handler function #1 - returns the index.html template, with film data
 	h1 := func(w http.ResponseWriter, r *http.Request) {
 		tmpl := template.Must(template.ParseFiles("html/base.html", "html/main_content.html", "html/left_side.html"))
-		id := r.URL.Query().Get("id")
-		fmt.Println("id =>", id)
 
 		// TO DO retrive form DB and sent the right data from 'id'
 		deviceAssets := []Device_asset{
@@ -57,9 +66,25 @@ func main() {
 			{Problems: "Кутер", Fix: "true", Idk: "asd"},
 		}
 
+		id := r.URL.Query().Get("id") // !!! getting the ID from the website URL
+		//fmt.Println("id =>", id) //prints the ID from the URL
+
+		//deviceName := "Example Device" // Replace with the desired device name
+		foundDevice := getDeviceByName(deviceAssets, id)
+
+		if foundDevice.Name != "" { // just easy DEBUG...
+			// Found the device, use foundDevice for further processing
+			fmt.Println("Found device:", foundDevice.Name)
+			fmt.Println("Model:", foundDevice)
+			// Add more fields as needed
+		} else {
+			fmt.Println("Device not found")
+		}
+
 		data := PageData{
-			DeviceAssets: deviceAssets,
-			Smt:          somethings,
+			DeviceAssetsNames: deviceAssets,
+			DeviceAssets:      []Device_asset{foundDevice},
+			Smt:               somethings,
 		}
 
 		tmpl.ExecuteTemplate(w, "base", data)
