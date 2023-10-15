@@ -5,7 +5,6 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	"time"
 )
 
 func getDeviceByName(devices []Device_asset, name string) Device_asset {
@@ -26,13 +25,6 @@ func main() {
 		tmpl := template.Must(template.ParseFiles("html/base.html", "html/main_content.html", "html/left_side.html"))
 
 		// TO DO retrive form DB and sent the right data from 'id'
-		deviceAssets := []Device_asset{
-			{Name: "Example Device", LastUpdated: time.Now(), Working: true, Model: "ABC123", CreatedTime: time.Now(), LatestRepair: time.Now(),
-				RepairList:      ListOfRepairs{Problem: "Broken Screen", Fix: "Replace Screen", Description: "The device's screen is cracked.", StartedRepair: time.Now(), EndedRepair: time.Now()},
-				ScheduledRepair: scheduledRepair{DateOfRepair: time.Now(), AddedDescription: "idk someting cool"},
-			},
-			{Name: "Голяма бъркалка", LastUpdated: time.Now(), Working: true},
-		}
 
 		somethings := []Someting{
 			{Problems: "Кутер", Fix: "true", Idk: "asd"},
@@ -42,19 +34,19 @@ func main() {
 		//fmt.Println("id =>", id) //prints the ID from the URL
 
 		//deviceName := "Example Device" // Replace with the desired device name
-		foundDevice := getDeviceByName(deviceAssets, id)
+		mainStructs := getRes()
+		foundDevice := getDeviceByName(mainStructs, id)
 
-		if foundDevice.Name != "" { // just easy DEBUG...
+		/* if foundDevice.Name != "" { // just easy DEBUG...
 			// Found the device, use foundDevice for further processing
 			fmt.Println("Found device:", foundDevice.Name)
 			fmt.Println("Model:", foundDevice)
 			// Add more fields as needed
 		} else {
 			fmt.Println("Device not found")
-		}
-
+		} */
 		data := PageData{
-			DeviceAssetsNames: deviceAssets,
+			DeviceAssetsNames: mainStructs,
 			DeviceAssets:      []Device_asset{foundDevice},
 			Smt:               somethings,
 		}
