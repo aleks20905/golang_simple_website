@@ -54,8 +54,42 @@ func main() {
 		tmpl.ExecuteTemplate(w, "base", data)
 	}
 
+	h2 := func(w http.ResponseWriter, r *http.Request) {
+		tmpl := template.Must(template.ParseFiles("html/base.html", "html/create_new_device.html", "html/left_side.html"))
+
+		// TO DO retrive form DB and sent the right data from 'id'
+
+		somethings := []Someting{
+			{Problems: "Кутер", Fix: "true", Idk: "asd"},
+		}
+
+		id := r.URL.Query().Get("id") // !!! getting the ID from the website URL
+		//fmt.Println("id =>", id) //prints the ID from the URL
+
+		//deviceName := "Example Device" // Replace with the desired device name
+		mainStructs := getRes()
+		foundDevice := getDeviceByName(mainStructs, id)
+
+		/* if foundDevice.Name != "" { // just easy DEBUG...
+			// Found the device, use foundDevice for further processing
+			fmt.Println("Found device:", foundDevice.Name)
+			fmt.Println("Model:", foundDevice)
+			// Add more fields as needed
+		} else {
+			fmt.Println("Device not found")
+		} */
+		data := PageData{
+			DeviceAssetsNames: mainStructs,
+			DeviceAssets:      []Device_asset{foundDevice},
+			Smt:               somethings,
+		}
+
+		tmpl.ExecuteTemplate(w, "base", data)
+	}
+
 	// define handlers
 	http.HandleFunc("/", h1)
+	http.HandleFunc("/createNewDev/", h2)
 	//http.HandleFunc("/add-film/", h2)
 
 	//define handlers for web-resurces
