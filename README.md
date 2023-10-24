@@ -3,6 +3,8 @@
 
 things to be done - https://app.clickup.com/9015050982/v/l/6-901500285818-1
 ![My Remote Image](https://gyazo.com/5e21e01029bd75948cbe0f598371d000)
+https://gyazo.com/5e21e01029bd75948cbe0f598371d000![image](https://github.com/aleks20905/golang_simple_website/assets/86319887/e0f73434-dcbc-4e2b-bb9e-c3f838bd9163)
+
 
 
 
