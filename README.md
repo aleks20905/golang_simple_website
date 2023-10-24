@@ -2,7 +2,7 @@
 
 
 things to be done - https://app.clickup.com/9015050982/v/l/6-901500285818-1
-![My Remote Image]([https://gyazo.com/5e21e01029bd75948cbe0f598371d000](https://i.gyazo.com/5e21e01029bd75948cbe0f598371d000.png))
+![My Remote Image](https://i.gyazo.com/5e21e01029bd75948cbe0f598371d000.png)
 
 
 
