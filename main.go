@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"time"
 )
 
 func getDeviceByName(devices []Device_asset, name string) Device_asset {
@@ -78,6 +79,7 @@ func main() {
 		} else {
 			fmt.Println("Device not found")
 		} */
+
 		data := PageData{
 			DeviceAssetsNames: mainStructs,
 			DeviceAssets:      []Device_asset{foundDevice},
@@ -87,9 +89,42 @@ func main() {
 		tmpl.ExecuteTemplate(w, "base", data)
 	}
 
+	idk := func(w http.ResponseWriter, r *http.Request) {
+		//tmpl := template.Must(template.ParseFiles("html/base.html", "html/create_new_device.html", "html/left_side.html"))
+
+		//id := r.URL.Query().Get("id") // !!! getting the ID from the website URL
+
+		device := Device_asset{
+			Name:        r.FormValue("devname"),
+			Model:       r.FormValue("devmodel"),
+			Description: r.FormValue("description"),
+			Working:     r.FormValue("working") == "on",
+			RepairList: ListOfRepairs{
+				Problem:       r.FormValue("problem"),
+				Fix:           r.FormValue("fix"),
+				Description:   r.FormValue("repairDescription"),
+				StartedRepair: parseDateTime(r.FormValue("startedRepair")),
+				EndedRepair:   parseDateTime(r.FormValue("endedRepair")),
+			},
+			LatestRepair: parseDateTime(r.FormValue("latestRepair")),
+			ScheduledRepair: scheduledRepair{
+				DateOfRepair:     parseDateTime(r.FormValue("dateOfRepair")),
+				AddedDescription: r.FormValue("addedDescription"),
+			},
+			CreatedTime: time.Now(),
+			LastUpdated: time.Now(),
+		}
+
+		sendData(device) //sending data to the db
+
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+	}
+
 	// define handlers
 	http.HandleFunc("/", h1)
 	http.HandleFunc("/createNewDev/", h2)
+	http.HandleFunc("/submit/", idk)
+
 	//http.HandleFunc("/add-film/", h2)
 
 	//define handlers for web-resurces
@@ -99,4 +134,12 @@ func main() {
 
 	log.Fatal(http.ListenAndServe(":8000", nil))
 
+}
+func parseDateTime(dateTimeStr string) time.Time {
+	layout := "2006-01-02T15:04"
+	t, err := time.Parse(layout, dateTimeStr)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return t
 }

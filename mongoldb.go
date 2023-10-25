@@ -44,3 +44,20 @@ func getRes() []Device_asset {
 	//fmt.Printf("Found device: %+v\n", results)
 	return results
 }
+func sendData(device Device_asset) {
+	connString := "mongodb+srv://mainAleks:mongodb@testcluster1.wfmzc1o.mongodb.net/?retryWrites=true&w=majority"
+
+	// Connect to MongoDB
+	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(connString))
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer client.Disconnect(context.Background())
+
+	collection := client.Database("testdb").Collection("devices")
+
+	_, err = collection.InsertOne(context.Background(), device)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
