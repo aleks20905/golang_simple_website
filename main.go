@@ -21,7 +21,6 @@ func getDeviceByName(devices []Device_asset, name string) Device_asset {
 func main() {
 	fmt.Println("Go app...")
 
-	// handler function #1 - returns the index.html template, with film data
 	h1 := func(w http.ResponseWriter, r *http.Request) {
 		tmpl := template.Must(template.ParseFiles("html/base.html", "html/main_content.html", "html/left_side.html"))
 
@@ -35,7 +34,7 @@ func main() {
 		//fmt.Println("id =>", id) //prints the ID from the URL
 
 		//deviceName := "Example Device" // Replace with the desired device name
-		mainStructs := getRes()
+		mainStructs := mongoGetAllData()
 		foundDevice := getDeviceByName(mainStructs, id)
 
 		/* if foundDevice.Name != "" { // just easy DEBUG...
@@ -58,32 +57,13 @@ func main() {
 	h2 := func(w http.ResponseWriter, r *http.Request) {
 		tmpl := template.Must(template.ParseFiles("html/base.html", "html/create_new_device.html", "html/left_side.html"))
 
-		// TO DO retrive form DB and sent the right data from 'id'
-
-		somethings := []Someting{
-			{Problems: "Кутер", Fix: "true", Idk: "asd"},
-		}
-
-		id := r.URL.Query().Get("id") // !!! getting the ID from the website URL
+		//id := r.URL.Query().Get("id") // !!! getting the ID from the website URL
 		//fmt.Println("id =>", id) //prints the ID from the URL
 
-		//deviceName := "Example Device" // Replace with the desired device name
-		mainStructs := getRes()
-		foundDevice := getDeviceByName(mainStructs, id)
-
-		/* if foundDevice.Name != "" { // just easy DEBUG...
-			// Found the device, use foundDevice for further processing
-			fmt.Println("Found device:", foundDevice.Name)
-			fmt.Println("Model:", foundDevice)
-			// Add more fields as needed
-		} else {
-			fmt.Println("Device not found")
-		} */
+		mainStructs := mongoGetAllData()
 
 		data := PageData{
 			DeviceAssetsNames: mainStructs,
-			DeviceAssets:      []Device_asset{foundDevice},
-			Smt:               somethings,
 		}
 
 		tmpl.ExecuteTemplate(w, "base", data)
@@ -93,29 +73,29 @@ func main() {
 		//tmpl := template.Must(template.ParseFiles("html/base.html", "html/create_new_device.html", "html/left_side.html"))
 
 		//id := r.URL.Query().Get("id") // !!! getting the ID from the website URL
-
-		device := Device_asset{
-			Name:        r.FormValue("devname"),
-			Model:       r.FormValue("devmodel"),
-			Description: r.FormValue("description"),
-			Working:     r.FormValue("working") == "on",
-			RepairList: ListOfRepairs{
-				Problem:       r.FormValue("problem"),
-				Fix:           r.FormValue("fix"),
-				Description:   r.FormValue("repairDescription"),
-				StartedRepair: parseDateTime(r.FormValue("startedRepair")),
-				EndedRepair:   parseDateTime(r.FormValue("endedRepair")),
-			},
-			LatestRepair: parseDateTime(r.FormValue("latestRepair")),
-			ScheduledRepair: scheduledRepair{
-				DateOfRepair:     parseDateTime(r.FormValue("dateOfRepair")),
-				AddedDescription: r.FormValue("addedDescription"),
-			},
-			CreatedTime: time.Now(),
-			LastUpdated: time.Now(),
+		if len(r.FormValue("devname")) > 1 { // #checks if the deviceName is longer than 2 characters
+			device := Device_asset{
+				Name:        r.FormValue("devname"),
+				Model:       r.FormValue("devmodel"),
+				Description: r.FormValue("description"),
+				Working:     r.FormValue("working") == "on",
+				RepairList: ListOfRepairs{
+					Problem:       r.FormValue("problem"),
+					Fix:           r.FormValue("fix"),
+					Description:   r.FormValue("repairDescription"),
+					StartedRepair: parseDateTime(r.FormValue("startedRepair")),
+					EndedRepair:   parseDateTime(r.FormValue("endedRepair")),
+				},
+				LatestRepair: parseDateTime(r.FormValue("latestRepair")),
+				ScheduledRepair: scheduledRepair{
+					DateOfRepair:     parseDateTime(r.FormValue("dateOfRepair")),
+					AddedDescription: r.FormValue("addedDescription"),
+				},
+				CreatedTime: time.Now(),
+				LastUpdated: time.Now(),
+			}
+			mongoSendData(device) //sending the data to the db
 		}
-
-		sendData(device) //sending data to the db
 
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}

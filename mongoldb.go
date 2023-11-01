@@ -9,7 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func getRes() []Device_asset {
+func mongoGetAllData() []Device_asset {
 	connString := "mongodb+srv://mainAleks:mongodb@testcluster1.wfmzc1o.mongodb.net/?retryWrites=true&w=majority"
 
 	// Connect to MongoDB
@@ -44,7 +44,7 @@ func getRes() []Device_asset {
 	//fmt.Printf("Found device: %+v\n", results)
 	return results
 }
-func sendData(device Device_asset) {
+func mongoSendData(device Device_asset) {
 	connString := "mongodb+srv://mainAleks:mongodb@testcluster1.wfmzc1o.mongodb.net/?retryWrites=true&w=majority"
 
 	// Connect to MongoDB

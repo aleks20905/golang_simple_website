@@ -28,9 +28,11 @@
         </div>
 
         <div class="content-section">
+            
             <table>
             {{$devs := .DeviceAssets}}
             {{range $dev:= $devs}}
+            {{if $dev.Name}}
 
                 <tr>
                     <td>Name</td> <td> {{$dev.Name}} </td>
@@ -100,11 +102,13 @@
                         </table>
                     </td>
                 </tr>
-
+            {{else}}
+            {{end}}
             {{end}}
             
             </table>
             {{range $dev:= $devs}}
+            {{if $dev.Name}}
             <table>
                 <br><br>
                 <tr>
@@ -122,7 +126,11 @@
 
                 </tr>
             </table>
+            {{else}}
             {{end}}
+            {{end}}
+
+            
         </div>
 
     </div>
