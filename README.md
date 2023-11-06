@@ -25,5 +25,32 @@ $ cd golang_simple_website
 ```bash
 $ go run .
 ```
+
+
+
+### 👉 Set Up for `Linux` 
+
+> 👉 **Step 1** - Download the code from the GH repository (using `GIT`) 
+
+```bash
+$ git clone https://github.com/aleks20905/golang_simple_website.git
+$ cd golang_simple_website
+```
+>  **or** but u will need to have gh packets
+```bash
+$ gh repo clone aleks20905/golang_simple_website
+$ cd golang_simple_website
+```
+
+
+
+<br />
+
+> 👉 **Step 2** - Start the APP in `localy`
+
+```bash
+$ go run *.go
+```
+g
 Visit `http://localhost:5085` in your browser. The app should be up & running.
 
