@@ -31,11 +31,13 @@ $ go run .
 ```bash
 $ git clone https://github.com/aleks20905/golang_simple_website.git
 $ cd golang_simple_website
+$ go get go.mongodb.org/mongo-driver/mongo
 ```
 >  **or** use 'gh' insted, but u will need to have gh install
 ```bash
 $ gh repo clone aleks20905/golang_simple_website
 $ cd golang_simple_website
+$ go get go.mongodb.org/mongo-driver/mongo
 ```
 <br />
 
