@@ -46,7 +46,7 @@ input[type=datetime-local] {
 	bottom: 0px;
 	left:0px;
 	right:0px;
-	background-color:rgba(0,0,0,0.5);
+	background-color:rgba(0, 0, 0, 0.282);
 	z-index:1000;
 
 	/* Flexbox centers the .modal-content vertically and horizontally */
@@ -56,53 +56,24 @@ input[type=datetime-local] {
 
 	/* Animate when opening */
 	animation-name: fadeIn;
-	animation-duration:150ms;
+	animation-duration:350ms;
 	animation-timing-function: ease;
 }
 
-#modal > .modal-underlay {
-	/* underlay takes up the entire viewport. This is only
-	required if you want to click to dismiss the popup */
-	position: absolute;
-	z-index: -1;
-	top:0px;
-	bottom:0px;
-	left: 0px;
-	right: 0px;
-}
-
 #modal > .modal-content {
-	/* Position visible dialog near the top of the window */
+	
 	margin-top:10vh;
-
-	/* Sizing for visible dialog */
 	width:80%;
 	max-width:600px;
-
-	/* Display properties for visible dialog*/
-	border:solid 1px #999;
-	border-radius:8px;
-	box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.3);
-	background-color:white;
+	border:solid 1px #400052c7;
+	border-radius:15px;
+	box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.3);
+	background-image: url("https://www.transparenttextures.com/patterns/cubes.png"), linear-gradient(to right top, #cf4af3, #e73bd7, #f631bc, #fd31a2, #ff3a8b, #ff4b78, #ff5e68, #ff705c, #ff8c51, #ffaa49, #ffc848, #ffe652);
 	padding:20px;
 
 	/* Animate when opening */
 	animation-name:zoomIn;
-	animation-duration:150ms;
-	animation-timing-function: ease;
-}
-
-#modal.closing {
-	/* Animate when closing */
-	animation-name: fadeOut;
-	animation-duration:150ms;
-	animation-timing-function: ease;
-}
-
-#modal.closing > .modal-content {
-	/* Animate when closing */
-	animation-name: zoomOut;
-	animation-duration:150ms;
+	animation-duration:350ms;
 	animation-timing-function: ease;
 }
 
@@ -111,17 +82,7 @@ input[type=datetime-local] {
 	100% {opacity: 1;}
 } 
 
-@keyframes fadeOut {
-	0% {opacity: 1;}
-	100% {opacity: 0;}
-} 
-
 @keyframes zoomIn {
 	0% {transform: scale(0.9);}
 	100% {transform: scale(1);}
-} 
-
-@keyframes zoomOut {
-	0% {transform: scale(1);}
-	100% {transform: scale(0.9);}
 } 

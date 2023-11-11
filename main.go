@@ -98,14 +98,39 @@ func main() {
 		}
 
 		http.Redirect(w, r, "/", http.StatusSeeOther)
-	}
+	}	
+	alert := func (w http.ResponseWriter, r *http.Request) {
+		fmt.Println("it worked somehow SHOW SOMETING ")
+		w.Write([]byte(`
+		<div id="modal">
+			<div class="modal-content">
+				<h1>Modal Dialog</h1>
+				This is the modal content.
+				You can put anything here, like text, or a form, or an image.
+				<br>
+				<br>
+					<button class="content-button" hx-post="/api/empty" hx-trigger="click" hx-swap="outerHTML" hx-target="#modal">
+					Delete Your Account
+					</button>
+			</div>
+		</div>
+		`))
+    }
+	
+	empty_str := func (w http.ResponseWriter, r *http.Request) {
+		fmt.Println("DELETE SOMETING ")
+		w.Write([]byte(""))
+    }
+
 
 	// define handlers
 	http.HandleFunc("/", h1)
 	http.HandleFunc("/createNewDev/", h2)
 	http.HandleFunc("/submit/", idk)
+	http.HandleFunc("/api/alert", alert)
+	http.HandleFunc("/api/empty", empty_str)
 
-	//http.HandleFunc("/add-film/", h2)
+
 
 	//define handlers for web-resurces
 	http.Handle("/styles/", http.StripPrefix("/styles/", http.FileServer(http.Dir("./styles")))) //from where to be accest in the browser, accest(repeat), whats the dir for the css file
