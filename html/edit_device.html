@@ -1,0 +1,109 @@
+{{define "main_content"}}
+<link rel="stylesheet" href="/styles/table.css">
+<div class="main-container">
+
+
+    <div class="content-wrapper">
+        <div class="content-wrapper-header">
+         <div class="content-wrapper-context">
+          <h3 class="img-content">
+           
+          </h3>
+          <button class="content-button">#TODO add button or smt</button>
+          
+          
+         </div>
+        </div>
+
+        <div class="content-section">
+            
+            <button  class="content-button " hx-get="/api/alert" hx-target="body" hx-swap="beforeend">test A alert</button>
+            <!-- #add button htmx -->
+
+            <form action="/submit/" method="post"> 
+            <table>
+            
+                <tr>
+                    <td>Name</td> <td> <input type="text" id="devname" name="devname"> </td>
+                </tr>
+                <tr>
+                    <td>Model</td> <td> <input type="text" id="devmodel" name="devmodel"> </td>
+                </tr>
+                <tr>
+                    <td>Description</td> <td> <input type="text" id="description" name="description"> </td>
+                </tr>
+                <tr>
+                    <td>Working</td> <td> <input type="checkbox" id="working" name="working"> </td>
+                </tr>
+                
+                <tr>
+                    <td>Repair List</td> 
+                    <td>
+                        <table>
+
+                            <tr>
+                                <td>Problem </td> <td>: <input type="text" id="problem" name="problem"> </td>
+                            </tr>
+                            <tr>
+                                <td>Fix </td> <td>: <input type="text" id="fix" name="fix"> </td>
+                            </tr>
+                            <tr>
+                                <td>Description </td> <td>: <input type="text" id="repairDescription" name="repairDescription"> </td>
+                            </tr>
+                            <tr>
+                                <td> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-calendar-week-fill" viewBox="0 0 16 16"> <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM9.5 7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm3 0h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zM2 10.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/> </svg>
+                                    StartedRepair 
+                                </td>
+                                <td>: <input type="datetime-local" id="startedRepair" name="startedRepair">  </td>
+                            </tr>
+                            <tr>
+                                <td> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-calendar-week-fill" viewBox="0 0 16 16"> <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM9.5 7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm3 0h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zM2 10.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/> </svg>
+                                    EndedRepair 
+                                </td>
+                                <td>: <input type="datetime-local" id="endedRepair" name="endedRepair"></td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-calendar-week-fill" viewBox="0 0 16 16"> <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM9.5 7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm3 0h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zM2 10.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/> </svg>
+                        LatestRepair</td>
+                    <td> <input type="datetime-local" id="latestRepair" name="latestRepair"></td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-calendar-week-fill" viewBox="0 0 16 16"> <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM9.5 7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm3 0h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zM2 10.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/> </svg>
+                        ScheduledRepair</td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>DateOfRepair</td>
+                                <td>: <input type="datetime-local" id="dateOfRepair" name="dateOfRepair" value="2023-10-25T12:00"></td>
+                            </tr>
+                            <tr>
+                                <td>AddedDescription</td>
+                                <td>: <input type="text" id="addedDescription" name="addedDescription"> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+            
+            
+            </table>
+            
+            <input class="content-button " type="submit" value="Submit">
+            </form>
+            
+           
+        </div>
+
+    </div>
+    
+     
+</div>
+{{end}}

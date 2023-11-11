@@ -36,5 +36,6 @@ type Someting struct {
 type PageData struct {
 	DeviceAssetsNames []Device_asset
 	DeviceAssets      []Device_asset
+	DeviceAsset      	Device_asset
 	Smt               []Someting
 }

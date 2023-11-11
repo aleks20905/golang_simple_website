@@ -24,11 +24,7 @@ func main() {
 	h1 := func(w http.ResponseWriter, r *http.Request) {
 		tmpl := template.Must(template.ParseFiles("html/base.html", "html/main_content.html", "html/left_side.html"))
 
-		// TO DO retrive form DB and sent the right data from 'id'
-
-		somethings := []Someting{
-			{Problems: "Кутер", Fix: "true", Idk: "asd"},
-		}
+		
 
 		id := r.URL.Query().Get("id") // !!! getting the ID from the website URL
 		//fmt.Println("id =>", id) //prints the ID from the URL
@@ -47,8 +43,7 @@ func main() {
 		} */
 		data := PageData{
 			DeviceAssetsNames: mainStructs,
-			DeviceAssets:      []Device_asset{foundDevice},
-			Smt:               somethings,
+			DeviceAsset:      foundDevice,
 		}
 
 		tmpl.ExecuteTemplate(w, "base", data)
@@ -98,7 +93,26 @@ func main() {
 		}
 
 		http.Redirect(w, r, "/", http.StatusSeeOther)
-	}	
+	}
+	editDevice := func(w http.ResponseWriter, r *http.Request) {
+		tmpl := template.Must(template.ParseFiles("html/base.html", "html/edit_device.html", "html/left_side.html"))
+
+		id := r.URL.Query().Get("id") // !!! getting the ID from the website URL
+		fmt.Println("id =>", id) //prints the ID from the URL
+
+		mainStructs := mongoGetAllData()
+
+		foundDevice := getDeviceByName(mainStructs, id)
+
+		data := PageData{
+			DeviceAssetsNames: mainStructs,
+			DeviceAsset:      foundDevice,
+		}
+
+		tmpl.ExecuteTemplate(w, "base", data)
+	}
+	
+
 	alert := func (w http.ResponseWriter, r *http.Request) {
 		fmt.Println("it worked somehow SHOW SOMETING ")
 		w.Write([]byte(`
@@ -118,8 +132,8 @@ func main() {
     }
 	
 	empty_str := func (w http.ResponseWriter, r *http.Request) {
-		fmt.Println("DELETE SOMETING ")
-		w.Write([]byte(""))
+		//fmt.Println("DELETE SOMETING ")
+		w.Write([]byte("")) // send empty string to the front end
     }
 
 
@@ -127,8 +141,10 @@ func main() {
 	http.HandleFunc("/", h1)
 	http.HandleFunc("/createNewDev/", h2)
 	http.HandleFunc("/submit/", idk)
+	http.HandleFunc("/edit/",editDevice)
 	http.HandleFunc("/api/alert", alert)
 	http.HandleFunc("/api/empty", empty_str)
+	
 
 
 
