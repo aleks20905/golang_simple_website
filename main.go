@@ -114,7 +114,7 @@ func main() {
 	
 
 	alert := func (w http.ResponseWriter, r *http.Request) {
-		fmt.Println("it worked somehow SHOW SOMETING ")
+		//fmt.Println("it worked somehow SHOW SOMETING ")
 		w.Write([]byte(`
 		<div id="modal">
 			<div class="modal-content">
@@ -124,7 +124,7 @@ func main() {
 				<br>
 				<br>
 					<button class="content-button" hx-post="/api/empty" hx-trigger="click" hx-swap="outerHTML" hx-target="#modal">
-					Delete Your Account
+					close
 					</button>
 			</div>
 		</div>

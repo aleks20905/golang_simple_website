@@ -17,23 +17,23 @@
 
         <div class="content-section">
             
-            <button  class="content-button " hx-get="/api/alert" hx-target="body" hx-swap="beforeend">test A alert</button>
-            <!-- #add button htmx -->
+            {{$dev := .DeviceAsset}}
+            
 
             <form action="/submit/" method="post"> 
             <table>
             
                 <tr>
-                    <td>Name</td> <td> <input type="text" id="devname" name="devname"> </td>
+                    <td>Name</td> <td> <input type="text" id="devname" name="devname" value={{$dev.Name}}> </td>
                 </tr>
                 <tr>
-                    <td>Model</td> <td> <input type="text" id="devmodel" name="devmodel"> </td>
+                    <td>Model</td> <td> <input type="text" id="devmodel" name="devmodel" value={{$dev.Model}}> </td>
                 </tr>
                 <tr>
-                    <td>Description</td> <td> <input type="text" id="description" name="description"> </td>
+                    <td>Description</td> <td> <input type="text" id="description" name="description"value={{$dev.Description}}> </td>
                 </tr>
                 <tr>
-                    <td>Working</td> <td> <input type="checkbox" id="working" name="working"> </td>
+                    <td>Working</td> <td> <input type="checkbox" id="working" name="working"value={{$dev.Working}}> </td>
                 </tr>
                 
                 <tr>
@@ -42,25 +42,25 @@
                         <table>
 
                             <tr>
-                                <td>Problem </td> <td>: <input type="text" id="problem" name="problem"> </td>
+                                <td>Problem </td> <td>: <input type="text" id="problem" name="problem"value={{$dev.RepairList.Problem}}> </td>
                             </tr>
                             <tr>
-                                <td>Fix </td> <td>: <input type="text" id="fix" name="fix"> </td>
+                                <td>Fix </td> <td>: <input type="text" id="fix" name="fix" value={{$dev.RepairList.Fix}}> </td>
                             </tr>
                             <tr>
-                                <td>Description </td> <td>: <input type="text" id="repairDescription" name="repairDescription"> </td>
+                                <td>Description </td> <td>: <input type="text" id="repairDescription" name="repairDescription" value="{{$dev.RepairList.Description}}"> </td>
                             </tr>
                             <tr>
                                 <td> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-calendar-week-fill" viewBox="0 0 16 16"> <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM9.5 7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm3 0h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zM2 10.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/> </svg>
                                     StartedRepair 
                                 </td>
-                                <td>: <input type="datetime-local" id="startedRepair" name="startedRepair">  </td>
+                                <td>: <input type="datetime-local" id="startedRepair" name="startedRepair" value="{{$dev.RepairList.StartedRepair.Format "2006-01-02T15"}}:00">  </td>
                             </tr>
                             <tr>
                                 <td> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-calendar-week-fill" viewBox="0 0 16 16"> <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM9.5 7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm3 0h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zM2 10.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/> </svg>
                                     EndedRepair 
                                 </td>
-                                <td>: <input type="datetime-local" id="endedRepair" name="endedRepair"></td>
+                                <td>: <input type="datetime-local" id="endedRepair" name="endedRepair" value="{{$dev.RepairList.EndedRepair.Format "2006-01-02T15"}}:00"></td>
                             </tr>
 
                         </table>
@@ -71,7 +71,7 @@
                     <td>
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-calendar-week-fill" viewBox="0 0 16 16"> <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM9.5 7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm3 0h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zM2 10.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/> </svg>
                         LatestRepair</td>
-                    <td> <input type="datetime-local" id="latestRepair" name="latestRepair"></td>
+                    <td> <input type="datetime-local" id="latestRepair" name="latestRepair" value="{{$dev.RepairList.EndedRepair.Format "2006-01-02T15"}}:00"></td>
 
                 </tr>
                 <tr>
@@ -82,11 +82,11 @@
                         <table>
                             <tr>
                                 <td>DateOfRepair</td>
-                                <td>: <input type="datetime-local" id="dateOfRepair" name="dateOfRepair" value="2023-10-25T12:00"></td>
+                                <td>: <input type="datetime-local" id="dateOfRepair" name="dateOfRepair" value="{{$dev.ScheduledRepair.DateOfRepair.Format "2006-01-02T15"}}:00"></td>
                             </tr>
                             <tr>
                                 <td>AddedDescription</td>
-                                <td>: <input type="text" id="addedDescription" name="addedDescription"> </td>
+                                <td>: <input type="text" id="addedDescription" name="addedDescription" value="{{$dev.ScheduledRepair.AddedDescription}}"> </td>
                             </tr>
                         </table>
                     </td>
@@ -96,7 +96,8 @@
             
             </table>
             
-            <input class="content-button " type="submit" value="Submit">
+            <input class="content-button " type="submit" value="Save" hx-get="/api/alert" hx-target="body" hx-swap="beforeend">
+            
             </form>
             
            

@@ -20,8 +20,7 @@
            
             {{$dev := .DeviceAsset}}
             {{$dev.Name}}
-            
-            
+              
           </h3>
           <button class="content-button">#TODO add button or smt</button>
          
@@ -93,14 +92,14 @@
                                 <td>: {{$dev.ScheduledRepair.DateOfRepair.Format "2006.01.02 - 15"}} :00</td>
                             </tr>
                             <tr>
+
                                 <td>AddedDescription</td>
                                 <td>: {{$dev.ScheduledRepair.AddedDescription}}</td>
                             </tr>
                         </table>
                     </td>
                 </tr>
-           
-           
+                    
             </table>
            
             <table>
@@ -120,18 +119,13 @@
 
                 </tr>
             </table>
-         
-
-        
-            
+           
             <a href="/edit/?id={{$dev.Name }}">
-                <button class="content-button" > Start free trial</button>
+                <button class="content-button" > Edit </button>
                 
             </a>
          
-            
         </div>
-
     </div>
     
      
