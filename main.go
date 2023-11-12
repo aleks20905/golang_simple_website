@@ -24,8 +24,6 @@ func main() {
 	h1 := func(w http.ResponseWriter, r *http.Request) {
 		tmpl := template.Must(template.ParseFiles("html/base.html", "html/main_content.html", "html/left_side.html"))
 
-		
-
 		id := r.URL.Query().Get("id") // !!! getting the ID from the website URL
 		//fmt.Println("id =>", id) //prints the ID from the URL
 
@@ -43,7 +41,7 @@ func main() {
 		} */
 		data := PageData{
 			DeviceAssetsNames: mainStructs,
-			DeviceAsset:      foundDevice,
+			DeviceAsset:       foundDevice,
 		}
 
 		tmpl.ExecuteTemplate(w, "base", data)
@@ -98,7 +96,7 @@ func main() {
 		tmpl := template.Must(template.ParseFiles("html/base.html", "html/edit_device.html", "html/left_side.html"))
 
 		id := r.URL.Query().Get("id") // !!! getting the ID from the website URL
-		fmt.Println("id =>", id) //prints the ID from the URL
+		fmt.Println("id =>", id)      //prints the ID from the URL
 
 		mainStructs := mongoGetAllData()
 
@@ -106,14 +104,13 @@ func main() {
 
 		data := PageData{
 			DeviceAssetsNames: mainStructs,
-			DeviceAsset:      foundDevice,
+			DeviceAsset:       foundDevice,
 		}
 
 		tmpl.ExecuteTemplate(w, "base", data)
 	}
-	
 
-	alert := func (w http.ResponseWriter, r *http.Request) {
+	alert := func(w http.ResponseWriter, r *http.Request) {
 		//fmt.Println("it worked somehow SHOW SOMETING ")
 		w.Write([]byte(`
 		<div id="modal">
@@ -129,24 +126,20 @@ func main() {
 			</div>
 		</div>
 		`))
-    }
-	
-	empty_str := func (w http.ResponseWriter, r *http.Request) {
+	}
+
+	empty_str := func(w http.ResponseWriter, r *http.Request) {
 		//fmt.Println("DELETE SOMETING ")
 		w.Write([]byte("")) // send empty string to the front end
-    }
-
+	}
 
 	// define handlers
 	http.HandleFunc("/", h1)
 	http.HandleFunc("/createNewDev/", h2)
 	http.HandleFunc("/submit/", idk)
-	http.HandleFunc("/edit/",editDevice)
+	http.HandleFunc("/edit/", editDevice)
 	http.HandleFunc("/api/alert", alert)
 	http.HandleFunc("/api/empty", empty_str)
-	
-
-
 
 	//define handlers for web-resurces
 	http.Handle("/styles/", http.StripPrefix("/styles/", http.FileServer(http.Dir("./styles")))) //from where to be accest in the browser, accest(repeat), whats the dir for the css file
@@ -156,4 +149,3 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8000", nil))
 
 }
-
