@@ -14,10 +14,12 @@ func parseDateTime(dateTimeStr string) time.Time {
 	}
 	return t
 }
+
 func empty_str(w http.ResponseWriter, r *http.Request) {
 	//fmt.Println("DELETE SOMETING ")
 	w.Write([]byte("")) // send empty string to the front end
 }
+
 func alert(w http.ResponseWriter, r *http.Request) {
 	//fmt.Println("it worked somehow SHOW SOMETING ")
 	w.Write([]byte(`
@@ -34,4 +36,14 @@ func alert(w http.ResponseWriter, r *http.Request) {
 		</div>
 	</div>
 	`))
+}
+
+func getDeviceByName(devices []Device_asset, dev_name string) Device_asset {
+	for _, device := range devices {
+		if device.Name == dev_name {
+			return device
+		}
+	}
+	// Return an empty Device_asset if no match is found
+	return Device_asset{}
 }
