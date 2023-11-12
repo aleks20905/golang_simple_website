@@ -110,29 +110,6 @@ func main() {
 		tmpl.ExecuteTemplate(w, "base", data)
 	}
 
-	alert := func(w http.ResponseWriter, r *http.Request) {
-		//fmt.Println("it worked somehow SHOW SOMETING ")
-		w.Write([]byte(`
-		<div id="modal">
-			<div class="modal-content">
-				<h1>Modal Dialog</h1>
-				This is the modal content.
-				You can put anything here, like text, or a form, or an image.
-				<br>
-				<br>
-					<button class="content-button" hx-post="/api/empty" hx-trigger="click" hx-swap="outerHTML" hx-target="#modal">
-					close
-					</button>
-			</div>
-		</div>
-		`))
-	}
-
-	empty_str := func(w http.ResponseWriter, r *http.Request) {
-		//fmt.Println("DELETE SOMETING ")
-		w.Write([]byte("")) // send empty string to the front end
-	}
-
 	// define handlers
 	http.HandleFunc("/", h1)
 	http.HandleFunc("/createNewDev/", h2)
