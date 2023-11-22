@@ -14,7 +14,8 @@ func h1(w http.ResponseWriter, r *http.Request) {
 	//fmt.Println("id =>", id) //prints the ID from the URL
 
 	//deviceName := "Example Device" // Replace with the desired device name
-	mainStructs := mongoGetAllData()
+	mainStructs := <-mongoGetAllData()
+
 	foundDevice := getDeviceByName(mainStructs, id)
 
 	/* if foundDevice.Name != "" { // just easy DEBUG...
@@ -39,7 +40,7 @@ func h2(w http.ResponseWriter, r *http.Request) {
 	//id := r.URL.Query().Get("id") // !!! getting the ID from the website URL
 	//fmt.Println("id =>", id) //prints the ID from the URL
 
-	mainStructs := mongoGetAllData()
+	mainStructs := <-mongoGetAllData()
 
 	data := PageData{
 		DeviceAssetsNames: mainStructs,
@@ -72,7 +73,10 @@ func idk(w http.ResponseWriter, r *http.Request) {
 			CreatedTime: time.Now(),
 			LastUpdated: time.Now(),
 		}
+
+		start := time.Now()
 		mongoSendData(device) //sending the data to the db
+		fmt.Println(time.Since(start))
 	}
 
 	http.Redirect(w, r, "/dev", http.StatusSeeOther)
@@ -82,8 +86,7 @@ func editDevice(w http.ResponseWriter, r *http.Request) {
 
 	id := r.URL.Query().Get("id") // !!! getting the ID from the website URL
 	fmt.Println("id =>", id)      //prints the ID from the URL
-
-	mainStructs := mongoGetAllData()
+	mainStructs := <-mongoGetAllData()
 
 	foundDevice := getDeviceByName(mainStructs, id)
 
