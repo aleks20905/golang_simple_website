@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 	"sync"
-	"time"
 )
 
 var cacheDbData []Device_asset
@@ -35,18 +34,4 @@ func main() {
 
 	log.Fatal(http.ListenAndServe(":8000", nil))
 
-}
-
-func updateCache(cacheDbData *[]Device_asset, wg *sync.WaitGroup) {
-	defer wg.Done()
-	for {
-		// Fetch data from the database
-		newData := mongoGetAllData()
-
-		// Update the cache with fresh data
-		*cacheDbData = newData
-
-		// Sleep for some time before the next update
-		time.Sleep(5 * time.Second)
-	}
 }

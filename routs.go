@@ -97,3 +97,23 @@ func editDevice(w http.ResponseWriter, r *http.Request) {
 
 	tmpl.ExecuteTemplate(w, "base", data)
 }
+
+func shops(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("html/base.html", "html/main_content.html", "html/left_side.html"))
+
+	id := r.URL.Query().Get("id") // !!! getting the ID from the website URL
+	//fmt.Println("id =>", id) //prints the ID from the URL
+
+	//deviceName := "Example Device" // Replace with the desired device name
+	mainStructs := cacheDbData
+
+	foundDevice := getDeviceByName(mainStructs, id)
+
+	data := PageData{
+		DeviceAssetsNames: mainStructs,
+		DeviceAsset:       foundDevice,
+	}
+
+	tmpl.ExecuteTemplate(w, "base", data)
+
+}

@@ -39,3 +39,11 @@ type PageData struct {
 	DeviceAsset       Device_asset
 	Smt               []Someting
 }
+type Shops struct {
+	phoneNumber  int
+	website      string
+	additionInfo string
+	review       string
+	address      string
+	color        string
+}
