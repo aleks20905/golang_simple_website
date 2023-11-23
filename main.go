@@ -9,7 +9,7 @@ import (
 )
 
 var cacheDbData []Device_asset
-var DEBUG bool = false
+var DEBUG bool = false // debug
 
 func main() {
 	fmt.Println("Go app...")
@@ -26,6 +26,7 @@ func main() {
 	http.HandleFunc("/edit/", editDevice)
 	http.HandleFunc("/api/alert", alert)
 	http.HandleFunc("/api/empty", empty_str)
+	http.HandleFunc("/shops/", empty_str)
 
 	//define handlers for web-resurces
 	http.Handle("/styles/", http.StripPrefix("/styles/", http.FileServer(http.Dir("./styles")))) //from where to be accest in the browser, accest(repeat), whats the dir for the css file
