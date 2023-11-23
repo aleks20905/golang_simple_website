@@ -14,7 +14,7 @@ func main() {
 	fmt.Println("Go app...")
 	//cache
 	var wg sync.WaitGroup
-	cacheDbData = mongoGetAllData()
+	cacheDbData = mongoGetAllDevices()
 	wg.Add(1)
 	go updateCache(&cacheDbData, &wg)
 
@@ -25,7 +25,7 @@ func main() {
 	http.HandleFunc("/edit/", editDevice)
 	http.HandleFunc("/api/alert", alert)
 	http.HandleFunc("/api/empty", empty_str)
-	http.HandleFunc("/shops/", empty_str)
+	http.HandleFunc("/shops/", shops)
 
 	//define handlers for web-resurces
 	http.Handle("/styles/", http.StripPrefix("/styles/", http.FileServer(http.Dir("./styles")))) //from where to be accest in the browser, accest(repeat), whats the dir for the css file

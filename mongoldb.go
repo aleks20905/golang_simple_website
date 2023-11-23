@@ -15,7 +15,7 @@ const (
 	connString = "mongodb+srv://mainAleks:mongodb@testcluster1.wfmzc1o.mongodb.net/?retryWrites=true&w=majority"
 )
 
-func mongoGetAllData() []Device_asset {
+func mongoGetAllDevices() []Device_asset {
 
 	start := time.Now()
 

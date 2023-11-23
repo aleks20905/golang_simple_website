@@ -52,7 +52,7 @@ func updateCache(cacheDbData *[]Device_asset, wg *sync.WaitGroup) {
 	defer wg.Done()
 	for {
 		// Fetch data from the database
-		newData := mongoGetAllData()
+		newData := mongoGetAllDevices()
 
 		// Update the cache with fresh data
 		*cacheDbData = newData
