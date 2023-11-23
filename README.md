@@ -7,7 +7,7 @@ things to be done - https://app.clickup.com/9015050982/v/l/6-901500285818-1
 
 ### 👉 Set Up for `Windows` 
 
-> 👉 **Step 1** - Download the code from the GH repository (using `GIT`) 
+> 👉 **Step 1** - Download the code from the GH repository (using `GIT`) and download mongodb drivers
 
 ```bash
 $ git clone https://github.com/aleks20905/golang_simple_website.git
@@ -16,7 +16,7 @@ $ cd golang_simple_website
 
 <br />
 
-> 👉 **Step 2** - Start the APP in `localy`
+> 👉 **Step 2** - Start the APP `localy`
 
 ```bash
 $ go run .
@@ -41,11 +41,11 @@ $ go get go.mongodb.org/mongo-driver/mongo
 ```
 <br />
 
-> 👉 **Step 2** - Start the APP in `localy`
+> 👉 **Step 2** - Start the APP `localy`
 
 ```bash
 $ go run *.go
 ```
 
-Visit `http://localhost:5085` in your browser. The app should be up & running.
+Visit `http://localhost:8000` in your browser. The app should be up & running.
 
