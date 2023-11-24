@@ -14,7 +14,7 @@ func h1(w http.ResponseWriter, r *http.Request) {
 	//fmt.Println("id =>", id) //prints the ID from the URL
 
 	//deviceName := "Example Device" // Replace with the desired device name
-	mainStructs := cacheDbData
+	mainStructs := cacheDbDevices
 
 	foundDevice := getDeviceByName(mainStructs, id)
 
@@ -40,7 +40,7 @@ func h2(w http.ResponseWriter, r *http.Request) {
 	//id := r.URL.Query().Get("id") // !!! getting the ID from the website URL
 	//fmt.Println("id =>", id) //prints the ID from the URL
 
-	mainStructs := cacheDbData
+	mainStructs := cacheDbDevices
 
 	data := PageData{
 		DeviceAssetsNames: mainStructs,
@@ -86,7 +86,7 @@ func editDevice(w http.ResponseWriter, r *http.Request) {
 
 	id := r.URL.Query().Get("id") // !!! getting the ID from the website URL
 	fmt.Println("id =>", id)      //prints the ID from the URL
-	mainStructs := cacheDbData
+	mainStructs := cacheDbDevices
 
 	foundDevice := getDeviceByName(mainStructs, id)
 
@@ -105,7 +105,7 @@ func shops(w http.ResponseWriter, r *http.Request) {
 	//fmt.Println("id =>", id) //prints the ID from the URL
 
 	//deviceName := "Example Device" // Replace with the desired device name
-	mainStructs := cacheDbData
+	mainStructs := cacheDbDevices
 
 	foundDevice := getDeviceByName(mainStructs, id)
 

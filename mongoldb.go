@@ -44,7 +44,7 @@ func mongoGetAllDevices() []Device_asset {
 	}
 
 	if DEBUG {
-		fmt.Println("loaded data from db  for:", time.Since(start))
+		fmt.Println("loaded data from devices_db  for:", time.Since(start))
 	}
 
 	return results
@@ -70,4 +70,42 @@ func mongoSendData(device Device_asset) {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+func mongoGetAllShops() []Shops {
+
+	start := time.Now()
+
+	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(connString))
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer client.Disconnect(context.Background())
+	collection := client.Database("testdb").Collection("shops")
+	var results []Shops
+	filter := bson.M{}
+	cursor, err := collection.Find(context.Background(), filter)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer cursor.Close(context.Background())
+	for cursor.Next(context.Background()) {
+		var result Shops
+		if err := cursor.Decode(&result); err != nil {
+			log.Fatal(err)
+		}
+		results = append(results, result)
+	}
+	if err := cursor.Err(); err != nil {
+		log.Fatal(err)
+	}
+
+	if DEBUG {
+		fmt.Println("loaded data from shops_db  for:", time.Since(start))
+	}
+
+	return results
+
+	//fmt.Printf("Found device: %+v\n", results)
+
 }

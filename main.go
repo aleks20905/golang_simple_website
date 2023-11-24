@@ -7,16 +7,18 @@ import (
 	"sync"
 )
 
-var cacheDbData []Device_asset
+var cacheDbDevices []Device_asset
+var cacheDbShops []Shops
 var DEBUG bool = false // debug
 
 func main() {
 	fmt.Println("Go app...")
 	//cache
 	var wg sync.WaitGroup
-	cacheDbData = mongoGetAllDevices()
-	wg.Add(1)
-	go updateCache(&cacheDbData, &wg)
+	cacheDbDevices = mongoGetAllDevices()
+	wg.Add(2)
+	go updateCacheDevices(&cacheDbDevices, &wg)
+	go updateCacheShops(&cacheDbShops, &wg)
 
 	// define handlers
 	http.HandleFunc("/dev/", h1)
