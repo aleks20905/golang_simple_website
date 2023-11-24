@@ -72,6 +72,7 @@ func updateCacheShops(cacheDbData *[]Shops, wg *sync.WaitGroup) {
 		*cacheDbData = newData
 
 		// Sleep for some time before the next update
+		// select with normal 5 sec or when sending new dato to be reloaded ???????????? #TODO
 		time.Sleep(5 * time.Second)
 	}
 }
