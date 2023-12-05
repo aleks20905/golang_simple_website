@@ -99,21 +99,45 @@ func editDevice(w http.ResponseWriter, r *http.Request) {
 }
 
 func shops(w http.ResponseWriter, r *http.Request) {
-	tmpl := template.Must(template.ParseFiles("html/base.html", "html/main_content.html", "html/left_side.html"))
+	tmpl := template.Must(template.ParseFiles("html/base.html", "html/shops.html", "html/left_side.html"))
 
 	id := r.URL.Query().Get("id") // !!! getting the ID from the website URL
-	//fmt.Println("id =>", id) //prints the ID from the URL
+
+	if DEBUG { //prints the ID from the URL
+		fmt.Println("shops/id =>", id)
+	}
 
 	//deviceName := "Example Device" // Replace with the desired device name
-	mainStructs := cacheDbDevices
+	mainShops := cacheDbShops
 
-	foundDevice := getDeviceByName(mainStructs, id)
+	foundShop := getShopByName(mainShops, id)
 
 	data := PageData{
-		DeviceAssetsNames: mainStructs,
-		DeviceAsset:       foundDevice,
+		Shops: mainShops,
+		Shop:  foundShop,
 	}
 
 	tmpl.ExecuteTemplate(w, "base", data)
 
+}
+
+func insertShopHandler(w http.ResponseWriter, r *http.Request) {
+	// Parse data from the request
+
+	// Create a Shop object
+	shop := Shops{
+		Name:         r.FormValue("name"),
+		PhoneNumber:  r.FormValue("phoneNumber"),
+		Website:      r.FormValue("website"),
+		AdditionInfo: r.FormValue("additionInfo"),
+		Review:       r.FormValue("review"),
+		Address:      r.FormValue("address"),
+		Color:        r.FormValue("color"),
+	}
+
+	// Insert data into the database
+	mongoSendShop(shop)
+
+	// Return success response to the frontend
+	fmt.Fprintf(w, "Data inserted successfully!")
 }

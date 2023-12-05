@@ -55,7 +55,6 @@ func mongoGetAllDevices() []Device_asset {
 
 }
 func mongoSendData(device Device_asset) {
-	connString := "mongodb+srv://mainAleks:mongodb@testcluster1.wfmzc1o.mongodb.net/?retryWrites=true&w=majority"
 
 	// Connect to MongoDB
 	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(connString))
@@ -108,4 +107,21 @@ func mongoGetAllShops() []Shops {
 
 	//fmt.Printf("Found device: %+v\n", results)
 
+}
+
+func mongoSendShop(device Shops) {
+
+	// Connect to MongoDB
+	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(connString))
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer client.Disconnect(context.Background())
+
+	collection := client.Database("testdb").Collection("shops")
+
+	_, err = collection.InsertOne(context.Background(), device)
+	if err != nil {
+		log.Fatal(err)
+	}
 }

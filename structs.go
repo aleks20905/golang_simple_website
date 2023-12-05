@@ -38,12 +38,15 @@ type PageData struct {
 	DeviceAssets      []Device_asset
 	DeviceAsset       Device_asset
 	Smt               []Someting
+	Shops             []Shops
+	Shop              Shops
 }
 type Shops struct {
-	phoneNumber  int
-	website      string
-	additionInfo string
-	review       string
-	address      string
-	color        string
+	Name         string
+	PhoneNumber  string
+	Website      string
+	AdditionInfo string
+	Review       string
+	Address      string
+	Color        string
 }

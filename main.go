@@ -28,6 +28,7 @@ func main() {
 	http.HandleFunc("/api/alert", alert)
 	http.HandleFunc("/api/empty", empty_str)
 	http.HandleFunc("/shops/", shops)
+	http.HandleFunc("/shops/createNew", insertShopHandler)
 
 	//define handlers for web-resurces
 	http.Handle("/styles/", http.StripPrefix("/styles/", http.FileServer(http.Dir("./styles")))) //from where to be accest in the browser, accest(repeat), whats the dir for the css file

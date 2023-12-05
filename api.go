@@ -48,6 +48,16 @@ func getDeviceByName(devices []Device_asset, dev_name string) Device_asset {
 	// Return an empty Device_asset if no match is found
 	return Device_asset{}
 }
+
+func getShopByName(shops []Shops, dev_name string) Shops {
+	for _, shop := range shops {
+		if shop.Name == dev_name {
+			return shop
+		}
+	}
+	// Return an empty Device_asset if no match is found
+	return Shops{}
+}
 func updateCacheDevices(cacheDbData *[]Device_asset, wg *sync.WaitGroup) {
 	defer wg.Done()
 	for {
